@@ -13,11 +13,17 @@ export function Header() {
     <View style={styles.container}>
 
       <LogoSvg></LogoSvg>
-      <UserPhoto imageUri="http://github.com/samuelbaldasso.png"/>
+
+      <View style={styles.logoutButton}>
       <TouchableOpacity>
         <Text style={styles.LogoutText}>Sair</Text>
       </TouchableOpacity>
 
+
+      <UserPhoto 
+      imageUri="https://randomuser.me/api/portraits/women/44.jpg"/>
+      </View>
+    
     </View>
 
   )

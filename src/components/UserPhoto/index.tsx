@@ -1,10 +1,13 @@
 import React from 'react';
 import avatarImg from '../../assets/avatar.png'
+
+import { LinearGradient } from 'expo-linear-gradient'
 import {
-  Image
+    Image
 } from 'react-native';
 
 import { styles } from './styles';
+import { COLORS } from '../../theme';
 
 const SIZES = {
     SMALL: {
@@ -25,19 +28,29 @@ type Props = {
 
 const AVATAR_DEFAULT = Image.resolveAssetSource(avatarImg).uri
 
-export function UserPhoto({imageUri, sizes = 'NORMAL'}:Props){
-    const {containerSize, avatarSize} = SIZES[sizes]
+export function UserPhoto({ imageUri, sizes = 'NORMAL' }: Props) {
+    const { containerSize, avatarSize } = SIZES[sizes]
 
-  return (
-  <Image source={{uri: imageUri || AVATAR_DEFAULT}}
-  style={[
-      styles.avatar,{
-          width: avatarSize,
-          height: avatarSize,
-          borderRadius: avatarSize/2
-      }
-      ]}>
+    return (
+        <LinearGradient colors={[COLORS.PINK, COLORS.YELLOW]} style={[styles.container, { 
+            width: containerSize,
+            height: containerSize,
+            borderRadius: containerSize / 2
+        }]}
+        start={{x: 0, y: 0.8}}
+        end={{x: 0.9, y: 1}}
+        >
+            <Image source={{ uri: imageUri || AVATAR_DEFAULT }}
+                style={[
+                    styles.avatar, {
+                        width: avatarSize,
+                        height: avatarSize,
+                        borderRadius: avatarSize / 2
+                    }
+                ]}>
 
-  </Image>
-  );
+            </Image>
+        </LinearGradient>
+
+    );
 }
