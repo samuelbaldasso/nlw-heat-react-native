@@ -32,8 +32,13 @@ export function Button({title, color, backgroundColor, icon, isLoading=false, ..
     disabled={isLoading}
     style={[styles.button, {backgroundColor}]}
     {...rest}>
+      {isLoading ? <ActivityIndicator color={color}></ActivityIndicator> :
+
+      <>
       <AntDesign name={icon} size={24} style={styles.icon} ></AntDesign>
         <Text style={[styles.title, {color}]}>{title}</Text>
+        </>
+}
     </TouchableOpacity>
   );
 }
