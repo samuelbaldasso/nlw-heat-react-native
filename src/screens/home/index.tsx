@@ -5,13 +5,15 @@ import {Header} from '../../components/header';
 import { MessageList } from '../../components/MessageList';
 import { SignInBox } from '../../components/SignInBox';
 import { SendMessageForm } from '../../components/SendMessageForm';
+import { useAuth } from '../../hooks/auth'
 
 export function Home(){
+    const {user} = useAuth()
     return (
         <View style={styles.container}>
            <Header></Header>
             <MessageList/>
-            <SignInBox/>
+            {user ? <SendMessageForm /> : <SignInBox />}
         </View>
     )
 }

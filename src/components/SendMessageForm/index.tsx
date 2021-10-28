@@ -11,8 +11,8 @@ import { styles } from './styles';
 
 export function SendMessageForm(){
 
-const [message, SetMessage] = useState('')
-const [sendingMessage, SetSendingMessage] = useState(false)
+const [message, setMessage] = useState('')
+const [sendingMessage, setSendingMessage] = useState(false)
 
   return (
     <View style={styles.container}>
@@ -22,7 +22,7 @@ const [sendingMessage, SetSendingMessage] = useState(false)
         placeholderTextColor={COLORS.GRAY_PRIMARY}
         multiline
         maxLength={140}
-        onChangeText={SetMessage}
+        onChangeText={setMessage}
         value={message}
         editable={!sendingMessage}
         >
