@@ -1,37 +1,58 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import {
-  View,
- TextInput
+  Alert,
+  Keyboard,
+  TextInput,
+  View
 } from 'react-native';
+import { api } from '../../services/api';
 import { COLORS } from '../../theme';
 import { Button } from '../Button';
 
 import { styles } from './styles';
 
 export function SendMessageForm(){
+    const [message, setMessage] = useState("");
+    const [sendingMessage, setSendingMessage] = useState(false);
 
-const [message, setMessage] = useState('')
-const [sendingMessage, setSendingMessage] = useState(false)
-
-  return (
-    <View style={styles.container}>
-        <TextInput style={styles.input}
-        keyboardAppearance='dark'
-        placeholder='Qual sau expectativa para o evento?'
-        placeholderTextColor={COLORS.GRAY_PRIMARY}
-        multiline
-        maxLength={140}
-        onChangeText={setMessage}
-        value={message}
-        editable={!sendingMessage}
-        >
+    async function handleMessageSubmit() {
+        const messageFormated = message.trim();
         
-        </TextInput>
+        if(messageFormated.length > 0) {
+            setSendingMessage(true)
+            await api.post("/messages", { message: messageFormated })
 
-        <Button title="ENVIAR MENSAGEM" backgroundColor={COLORS.PINK} color={COLORS.WHITE} isLoading={false}>
+            setMessage("");
+            Keyboard.dismiss()
+            setSendingMessage(false)
+            Alert.alert("Mensagem enviada com sucesso!")
+        } else {
+            Alert.alert("Escreva a mensagem para enviar.")
+        }
+    }
 
-        </Button>
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+            <TextInput
+                keyboardAppearance="dark"
+                placeholder="Qual sua expectativa para o evento"
+                multiline
+                onChangeText={setMessage}
+                value={message}
+                maxLength={140}
+                placeholderTextColor={COLORS.GRAY_PRIMARY}
+                style={styles.input}
+                editable={!sendingMessage}
+            />
+
+            <Button 
+                title="ENVIAR MENSAGEM"
+                backgroundColor={COLORS.PINK}
+                color={COLORS.WHITE}
+                isLoading={sendingMessage}
+                onPress={handleMessageSubmit}
+            />
+        </View>
+    );
 }

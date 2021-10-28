@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { FONTS, COLORS } from '../../theme';
+import { COLORS, FONTS } from '../../theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -14,15 +14,15 @@ export const styles = StyleSheet.create({
     marginBottom: 12
   },
   footer: {
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center"
   },
 
   userName: {
     fontSize: 15,
     fontFamily: FONTS.REGULAR,
     color: COLORS.WHITE,
+    marginLeft: 16
   }
 });
